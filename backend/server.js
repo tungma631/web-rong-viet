@@ -109,7 +109,7 @@ app.delete('/api/products/:id', authAdmin, async (req, res) => {
     }
 });
 
-app.post('/create-payment-link', async (req, res) => {
+app.post('/api/create-payment-link', async (req, res) => {
     try {
         const { amount, description, items } = req.body;
         // PayOS yêu cầu orderCode là số nguyên (tối đa 53 bits). Ta dùng timestamp cho đơn giản.
@@ -148,7 +148,7 @@ app.post('/create-payment-link', async (req, res) => {
 });
 
 // PayOS sẽ chủ động gửi dữ liệu về cổng này (Webhook / IPN)
-app.post('/payos-webhook', (req, res) => {
+app.post('/api/payos-webhook', (req, res) => {
     console.log("Receive webhook from PayOS");
     try {
         // Xác thực dữ liệu webhook để tránh giả mạo
@@ -169,7 +169,7 @@ app.post('/payos-webhook', (req, res) => {
     }
 });
 
-app.get('/order/:orderCode', (req, res) => {
+app.get('/api/order/:orderCode', (req, res) => {
     const order = orders[req.params.orderCode];
     if (order) {
         return res.json({ error: 0, data: order });
