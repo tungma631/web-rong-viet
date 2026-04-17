@@ -108,7 +108,10 @@ btnCheckout.addEventListener('click', async () => {
         btnCheckout.innerText = "Đang tạo cổng thanh toán...";
         btnCheckout.disabled = true;
 
-        const response = await fetch("http://localhost:3000/create-payment-link", {
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+        const fetchUrl = isLocal ? "http://localhost:3000/create-payment-link" : "/create-payment-link";
+        
+        const response = await fetch(fetchUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

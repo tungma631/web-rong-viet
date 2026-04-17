@@ -54,7 +54,8 @@ btnGenerate.addEventListener('click', () => {
     btnAcceptProduct.style.display = 'none';
 
     // Real API Call qua Backend
-    const API_URL = `http://localhost:3000/api/generate-avatar`;
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+    const API_URL = isLocal ? "http://localhost:3000/api/generate-avatar" : "/api/generate-avatar";
     // Đọc file ảnh user tải lên
     const file = userFaceInput.files[0];
     const reader = new FileReader();
