@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hành Trình Rồng Việt - Cửa Phẩm</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-nav">
+                <div class="logo">
+                    <!-- Dùng icon placeholder tạm thời -->
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-color)">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                    <span>Hành Trình Rồng Việt</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#products" class="active">Cửa hàng</a></li>
+                        <li><a href="#news">Tin tức</a></li>
+                        <li><a href="#about">Giới thiệu</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="search-cart">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <div class="cart-icon" id="cart-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <!-- Hero Banner -->
+        <section class="hero">
+        </section>
+
+        <!-- Sponsors -->
+        <section class="sponsors">
+            <div class="container">
+                <h3>Nhà tài trợ</h3>
+                <div class="sponsor-logos">
+                    <img src="https://number1.com.vn/wp-content/uploads/2016/01/nuoc-tang-luc-logo.jpg" alt="Number 1"
+                        title="Number 1"
+                        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/N%C6%B0%E1%BB%9Bc_T%C4%83ng_L%E1%BB%B1c_Number_1.png/320px-N%C6%B0%E1%BB%9Bc_T%C4%83ng_L%E1%BB%B1c_Number_1.png'">
+                    <img src="https://icolor.vn/wp-content/uploads/2021/03/B%E1%BB%99-nh%E1%BA%ADn-di%E1%BB%87n-th%C6%B0%C6%A1ng-hi%E1%BB%87u-v%C3%A0-logo-OMO-6.jpg"
+                        alt="OMO" title="OMO">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Logo_Lifebuoy.png" alt="Lifebuoy"
+                        title="Lifebuoy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Logo_of_VinFast_%283D%29.svg/1280px-Logo_of_VinFast_%283D%29.svg.png"
+                        alt="Vinfast" title="Vinfast">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Samsung_old_logo_before_year_2015.svg"
+                        alt="Samsung" title="Samsung">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Xiaomi_logo.svg/960px-Xiaomi_logo.svg.png"
+                        alt="Xiaomi" title="Xiaomi">
+                </div>
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section class="products-section page-section active-page" id="products">
+            <div class="container">
+                <h2 class="section-title">Vật Phẩm Rồng Việt</h2>
+
+                <div class="category-tabs" id="categoryTabs">
+                    <button class="tab-btn active" data-category="all">Tất cả</button>
+                    <button class="tab-btn" data-category="thoi-trang">Thời trang</button>
+                    <button class="tab-btn" data-category="phu-kien">Phụ kiện</button>
+                    <button class="tab-btn" data-category="ve">Vé sự kiện</button>
+                </div>
+
+                <div class="product-grid" id="productGrid">
+
+                    <!-- Special Card: AI Avatar -->
+                    <div class="product-card special-card">
+                        <!-- Ảnh mang tính minh họa -->
+                        <img src="assets/img/aodai_nam.png" alt="Tạo ảnh thần tượng" class="product-img"
+                            style="border-radius: 8px;">
+                        <div class="product-title">Tạo Hóa Thân Rồng Việt</div>
+                        <div class="product-price">Thẻ Đặc Biệt</div>
+                        <button class="btn-add-cart" id="btnCreatorModal">Tạo Ảnh Ngay</button>
+                    </div>
+
+                    <!-- Danh sách sản phẩm sẽ được tự động chèn bằng JavaScript từ Backend -->
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="news-section page-section" id="news">
+            <div class="container">
+                <h2 class="section-title">Tin Tức Sự Kiện</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="News 1" class="news-img">
+                        <div class="news-content">
+                            <h3>Thông báo ra mắt Thẻ Hóa Thân Rồng Việt</h3>
+                            <p class="news-date">15/05/2026</p>
+                            <p>Trải nghiệm ngay bộ công cụ AI mới cho phép người hâm mộ ghép ảnh với thần tượng trực
+                                tiếp
+                                trên website. Với thiết kế độc bản cùng quyền lợi hội viên vô cùng hấp dẫn.</p>
+                            <a href="#" class="btn-read-more">Đọc tiếp →</a>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <img src="https://images.unsplash.com/photo-1540039155732-684736382103?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="News 2" class="news-img">
+                        <div class="news-content">
+                            <h3>Lễ hội Âm nhạc Dã ngoại lớn nhất Đông Nam Bộ</h3>
+                            <p class="news-date">10/05/2026</p>
+                            <p>Dàn xếp sân khấu ngoài trời với sức chứa 50.000 khán giả, hệ thống âm thanh ánh sáng
+                                chuẩn
+                                quốc tế. Cùng đón chờ những màn trình diễn rực lửa từ các siêu sao.</p>
+                            <a href="#" class="btn-read-more">Đọc tiếp →</a>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="News 3" class="news-img">
+                        <div class="news-content">
+                            <h3>Hướng dẫn sở hữu vé qua cổng Momo Payment</h3>
+                            <p class="news-date">02/05/2026</p>
+                            <p>Hành Trình Rồng Việt chính thức bắt tay cùng Momo, mở bán toàn bộ hệ thống vé sự kiện với
+                                thao tác cực nhanh, bảo mật và siêu tiện lợi cho các Fan.</p>
+                            <a href="#" class="btn-read-more">Đọc tiếp →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section page-section" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">Về Hành Trình Rồng Việt
+                        </h2>
+                        <p>Khởi nguồn từ khao khát kết nối tinh thần của những bạn trẻ yêu nhạc và niềm tự hào dân tộc,
+                            <strong>Hành Trình Rồng Việt</strong> mang theo ngọn lửa nhiệt huyết đi khắp nẻo đường tổ
+                            quốc,
+                            tạo ra chuỗi sự kiện giao lưu văn hóa, nghệ thuật đỉnh cao.
+                        </p>
+                        <p style="margin-top: 10px;">Sứ mệnh của chúng tôi là đem khán giả đến gần hơn với những thần
+                            tượng
+                            lớn, cung cấp không gian mua sắm các vật phẩm chính hãng và hệ thống trải nghiệm số hiện đại
+                            (AI
+                            Avatar, thanh toán thông minh) bậc nhất tại Đông Nam Á.</p>
+                        <p style="margin-top: 20px; font-weight: bold; color: var(--primary-color);">🔥 Cùng Nhau Dựng
+                            Xây -
+                            Cùng Vươn Tầm Thế Giới 🔥</p>
+                    </div>
+                    <div class="about-img-box">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Hành Trình Rồng Việt">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> <!-- Đóng main-wrapper -->
+
+    <!-- Chatbot Widget Button -->
+    <div class="chat-widget-btn" id="openChatBtn">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Giỏ hàng của bạn</h3>
+            <button class="close-cart" id="closeCartBtn">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItemsList">
+            <!-- Items sẽ được render qua JS -->
+            <p class="empty-cart-msg">Giỏ hàng đang trống.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span id="cartTotalPrice">0 đ</span>
+            </div>
+            <button class="btn-checkout" id="btnCheckout">Thanh toán (PayOS)</button>
+        </div>
+    </div>
+
+    <!-- MoMo Payment Modal -->
+    <div class="modal-overlay" id="momoModalOverlay">
+        <div class="modal-content text-center">
+            <span class="close-modal" id="closeMomoModal">&times;</span>
+            <h2 style="color: #A50064; margin-bottom: 20px;">Thanh toán qua MoMo</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="MoMo Logo"
+                style="height: 50px; margin-bottom: 20px;">
+            <p id="momoOrderInfo">Mã đơn hàng: HTRV-...<br>Tổng tiền: 0 đ</p>
+            <div class="momo-qr-placeholder"
+                style="margin: 20px auto; width: 250px; height: 250px; border: 2px dashed #A50064; display: flex; align-items: center; justify-content: center; background: #fffafa; border-radius: 10px;">
+                <!-- QR Fake mockup -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=MoMoPaymentMockup"
+                    alt="QR Code">
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-light);">Vui lòng dùng ứng dụng MoMo để quét mã thanh toán
+            </p>
+            <button class="btn-add-cart" id="btnConfirmPaid" style="margin-top: 20px;">Tôi đã chuyển khoản</button>
+        </div>
+    </div>
+
+    <!-- AI Avatar Creator Modal -->
+    <div class="modal-overlay" id="aiModalOverlay">
+        <div class="modal-content">
+            <span class="close-modal" id="closeAiModal">&times;</span>
+            <h2>Tạo Hóa Thân Rồng Việt</h2>
+            <p>Tải lên ảnh rõ mặt của bạn để AI ghép cùng nhân vật thần tượng. Tối đa 5 lượt gen.</p>
+
+            <div class="ai-workspace">
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="userFaceInput" accept="image/*" hidden>
+                    <button class="btn-secondary" onclick="document.getElementById('userFaceInput').click()">Chọn ảnh
+                        của bạn</button>
+                    <p id="fileNameDisplay" style="margin-top: 10px; font-size: 0.85rem;"></p>
+                </div>
+
+                <div class="user-gender" style="margin-bottom: 15px;">
+                    <label>Giới tính của bạn:</label>
+                    <div style="display: flex; gap: 15px; margin-top: 5px;">
+                        <label style="cursor: pointer;"><input type="radio" name="userGender" value="nam" checked>
+                            Nam</label>
+                        <label style="cursor: pointer;"><input type="radio" name="userGender" value="nu"> Nữ</label>
+                    </div>
+                </div>
+
+                <div class="idol-selection">
+                    <label>Chọn thần tượng để chụp chung:</label>
+                    <div class="idol-grid"
+                        style="display: flex; gap: 15px; margin-top: 10px; justify-content: flex-start;">
+
+                        <label class="idol-item" style="cursor: pointer; text-align: center;">
+                            <input type="radio" name="idolSelect" value="sontung" checked style="margin-bottom: 5px;">
+                            <img src="assets/img/sontung.png" alt="Sơn Tùng"
+                                onerror="this.src='https://ui-avatars.com/api/?name=Son+Tung&background=random&size=100'"
+                                style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; display: block; border: 2px solid var(--primary-color);">
+                            <span style="font-size: 0.85rem; font-weight: bold; margin-top: 5px; display: block;">Sơn
+                                Tùng</span>
+                        </label>
+
+                        <label class="idol-item" style="cursor: pointer; text-align: center;">
+                            <input type="radio" name="idolSelect" value="mono" style="margin-bottom: 5px;">
+                            <img src="assets/img/mono.png" alt="Mono"
+                                onerror="this.src='https://ui-avatars.com/api/?name=Mono&background=random&size=100'"
+                                style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; display: block; border: 2px solid var(--primary-color);">
+                            <span
+                                style="font-size: 0.85rem; font-weight: bold; margin-top: 5px; display: block;">Mono</span>
+                        </label>
+
+                        <label class="idol-item" style="cursor: pointer; text-align: center;">
+                            <input type="radio" name="idolSelect" value="aodai" style="margin-bottom: 5px;">
+                            <img src="assets/img/aodai.png" alt="Áo dài"
+                                onerror="this.src='https://ui-avatars.com/api/?name=Ao+Dai&background=random&size=100'"
+                                style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; display: block; border: 2px solid var(--primary-color);">
+                            <span style="font-size: 0.85rem; font-weight: bold; margin-top: 5px; display: block;">Áo
+                                dài</span>
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="ai-preview" id="aiPreviewArea" style="display: none;">
+                    <img id="aiResultImg" src="" alt="Kết quả AI">
+                    <div id="aiLoading" class="ai-loading">
+                        <div class="spinner"></div>
+                        <p>AI đang xử lý... vui lòng đợi</p>
+                    </div>
+                </div>
+
+                <div class="ai-actions">
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn-secondary" id="btnGenerate">Tạo ảnh AI</button>
+                        <button class="btn-add-cart" id="btnAcceptProduct" style="display: none;">Chốt ảnh & Thêm vào
+                            giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chat-header">
+            <h4>Trợ lý Rồng Việt</h4>
+            <button id="closeChatBtn" style="background:none; color:white; font-size: 1.2rem;">&times;</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message bot">Xin chào! Tôi là trợ lý AI của Hành Trình Rồng Việt. Bạn cần thông tin gì về
+                sự kiện hay sản phẩm?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Nhập câu hỏi...">
+            <button id="btnSendChat">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/ai-avatar.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+
+    <script>
+        // SPA Routing cơ bản (Chuyển trang Menu)
+        document.addEventListener("DOMContentLoaded", () => {
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('.page-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+
+                        // Cập nhật class active cho menu
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+
+                        // Cập nhật class active cho nội dung
+                        sections.forEach(sec => sec.classList.remove('active-page'));
+                        const targetSection = document.getElementById(targetId);
+                        if (targetSection) targetSection.classList.add('active-page');
+
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

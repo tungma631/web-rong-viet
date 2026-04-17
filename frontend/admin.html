@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Trị Hành Trình Rồng Việt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body { background: #f4f6f9; color: #333; padding: 20px; }
+        .admin-container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary-color); margin-bottom: 20px; font-size: 1.5rem; text-align: center;}
+        
+        .form-panel { background: #fafafa; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #ddd; }
+        .form-panel input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .form-panel button { padding: 10px 15px; background: var(--secondary-color); color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .form-panel button:hover { opacity: 0.9; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table th, table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        table th { background: var(--primary-color); color: #fff; }
+        .img-preview { max-width: 50px; border-radius: 4px; }
+        .btn-sm { padding: 5px 10px; border-radius: 3px; border: none; cursor: pointer; font-size: 0.85rem; color: #fff; margin-right: 5px; }
+        .btn-edit { background: #f39c12; }
+        .btn-delete { background: #e74c3c; }
+        
+        .header-action { display: flex; justify-content: space-between; align-items: center; }
+        .header-action a { color: var(--primary-color); text-decoration: none; font-weight: 600; }
+        .header-action a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="header-action">
+            <h1>Quản Lý Sản Phẩm Cửa Hàng</h1>
+            <a href="index.html">← Quay về Cửa hàng</a>
+        </div>
+
+        <div class="form-panel">
+            <h3 id="formTitle" style="margin-bottom: 10px;">Thêm Sản Phẩm Mới</h3>
+            <input type="hidden" id="prodId">
+            <input type="text" id="prodTitle" placeholder="Tên sản phẩm (VD: Áo Hành Trình)" required>
+            <input type="number" id="prodPrice" placeholder="Giá tiền (VD: 119000)" required>
+            <input type="text" id="prodImg" placeholder="Đường dẫn ảnh (URL)" required>
+            <select id="prodCategory" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="thoi-trang">Thời trang</option>
+                <option value="phu-kien">Phụ kiện</option>
+                <option value="ve">Vé sự kiện</option>
+            </select>
+            <button id="btnSaveProd">Lưu Sản Phẩm</button>
+            <button id="btnCancelEdit" style="display:none; background: #95a5a6;">Hủy Cập Nhật</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th width="80">Ảnh</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th width="150">Hành Động</th>
+                </tr>
+            </thead>
+            <tbody id="adminProductList">
+                <tr><td colspan="4" style="text-align: center;">Đang tải dữ liệu...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
