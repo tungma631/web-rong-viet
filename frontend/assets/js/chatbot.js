@@ -41,7 +41,7 @@ const fetchGeminiResponse = async (userPrompt) => {
             })
         });
         const data = await response.json();
-        
+
         if (data.candidates && data.candidates.length > 0) {
             return data.candidates[0].content.parts[0].text;
         } else {
@@ -71,7 +71,7 @@ const handleSend = async () => {
 
     // Lấy đáp án
     const botReply = await fetchGeminiResponse(text);
-    
+
     // Bỏ loading, hiện reply
     document.getElementById('msg-loading').remove();
     appendMessage(botReply, 'bot');

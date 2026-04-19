@@ -25,7 +25,7 @@ const formatCurrency = (amount) => {
 const updateCartUI = () => {
     cartCount.innerText = shoppingCart.length;
     let total = 0;
-    
+
     if (shoppingCart.length === 0) {
         cartItemsList.innerHTML = '<p class="empty-cart-msg">Giỏ hàng đang trống.</p>';
     } else {
@@ -69,7 +69,7 @@ document.querySelectorAll('.product-card:not(.special-card) .btn-add-cart').forE
         // Parse giá từ string (VD: 119.000 đ)
         const priceStr = card.querySelector('.product-price').innerText.replace(/[^\d]/g, '');
         const price = parseInt(priceStr, 10);
-        
+
         addToCartObject({ img, title, price });
     });
 });
@@ -94,7 +94,7 @@ btnCheckout.addEventListener('click', async () => {
         alert("Giỏ hàng đang trống!");
         return;
     }
-    
+
     // Tính tổng & chuẩn bị mảng items
     const total = shoppingCart.reduce((sum, item) => sum + item.price, 0);
     const items = shoppingCart.map(item => ({
@@ -110,7 +110,7 @@ btnCheckout.addEventListener('click', async () => {
 
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
         const fetchUrl = isLocal ? "http://localhost:3000/api/create-payment-link" : "/api/create-payment-link";
-        
+
         const response = await fetch(fetchUrl, {
             method: "POST",
             headers: {

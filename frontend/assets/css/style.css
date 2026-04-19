@@ -19,14 +19,16 @@
 }
 
 body {
-    background-color: var(--white); /* Đổi toàn bộ nền ngoài thành Trắng */
+    background-color: var(--white);
+    /* Đổi toàn bộ nền ngoài thành Trắng */
     color: var(--text-dark);
 }
 
 .main-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    background-color: transparent; /* Đồng bộ hoàn toàn với màu nền của body */
+    background-color: transparent;
+    /* Đồng bộ hoàn toàn với màu nền của body */
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
@@ -202,13 +204,15 @@ nav a.active {
 }
 
 .sponsor-logos img {
-    height: 40px; /* Khống chế chiều cao đồng bộ cho mọi logo */
+    height: 40px;
+    /* Khống chế chiều cao đồng bộ cho mọi logo */
     object-fit: contain;
     transition: var(--transition);
 }
 
 .sponsor-logos img:hover {
-    transform: scale(1.1); /* Hơi phóng to lên một chút khi hover cho đẹp */
+    transform: scale(1.1);
+    /* Hơi phóng to lên một chút khi hover cho đẹp */
 }
 
 /* Products Section */
@@ -480,19 +484,99 @@ nav a.active {
 
 /* Responsive */
 @media (max-width: 768px) {
-    header {
+    /* Header layout */
+    .header-container {
         flex-direction: column;
         padding: 15px;
+        gap: 15px;
+    }
+
+    .logo-nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 15px;
     }
 
     .search-cart {
         width: 100%;
         justify-content: space-between;
+        gap: 15px;
+    }
+
+    .search-bar {
+        flex: 1;
     }
 
     .search-bar input {
         width: 100%;
+    }
+
+    /* Hero Banner Khoảng trắng thừa */
+    .hero {
+        padding: 100px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Chỉnh nút tab menu nhỏ lại gọn gàng */
+    .category-tabs {
+        gap: 10px;
+    }
+
+    .tab-btn {
+        padding: 6px 15px;
+        font-size: 0.9rem;
+    }
+
+    /* Grid layout sản phẩm - Rút về 2 cột điện thoại để đủ ngắm sản phẩm */
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .product-img {
+        height: 150px;
+    }
+
+    /* Thu hẹp padding Modal Avatar*/
+    .modal-content {
+        padding: 20px 15px;
+        width: 95%;
+    }
+
+    /* Chỉnh Idol Grid Center */
+    .idol-grid {
+        justify-content: center !important;
+        flex-wrap: wrap;
+    }
+
+    /* Chatbot window */
+    .chatbot-window {
+        width: calc(100% - 40px);
+        right: 20px;
+        bottom: 100px;
+        height: 60vh;
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        /* Cho phép 1 cột nếu màn hình quá hẹp dưới chuẩn */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
     }
 }
 
@@ -661,7 +745,8 @@ nav a.active {
 .btn-checkout {
     width: 100%;
     padding: 12px;
-    background-color: #007BFF; /* Đổi sang màu Xanh Dương (Blue) */
+    background-color: #007BFF;
+    /* Đổi sang màu Xanh Dương (Blue) */
     color: white;
     font-weight: bold;
     border-radius: 8px;
@@ -671,7 +756,8 @@ nav a.active {
 }
 
 .btn-checkout:hover {
-    background-color: #0056b3; /* Xanh tối hơn lúc di chuột */
+    background-color: #0056b3;
+    /* Xanh tối hơn lúc di chuột */
 }
 
 /* AI Avatar Creator */

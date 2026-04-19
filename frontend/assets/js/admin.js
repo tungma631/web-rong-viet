@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const res = await fetch(API_URL);
             const products = await res.json();
-            
+
             adminProductList.innerHTML = "";
             if (products.length === 0) {
                 adminProductList.innerHTML = `<tr><td colspan="3" style="text-align: center;">Chưa có sản phẩm nào.</td></tr>`;
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             category: prodCategory.value
         };
 
-        if(!payload.title || !payload.price || !payload.img) {
+        if (!payload.title || !payload.price || !payload.img) {
             alert("Vui lòng nhập đủ thông tin!");
             return;
         }
@@ -74,28 +74,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Edit
                 const res = await fetch(`${API_URL}/${prodId.value}`, {
                     method: "PUT",
-                    headers: { 
+                    headers: {
                         "Content-Type": "application/json",
                         "x-admin-pin": adminPin
                     },
                     body: JSON.stringify(payload)
                 });
-                if(!res.ok) throw new Error(await res.text());
+                if (!res.ok) throw new Error(await res.text());
                 alert("Đã cập nhật thành công!");
             } else {
                 // Add
                 const res = await fetch(API_URL, {
                     method: "POST",
-                    headers: { 
+                    headers: {
                         "Content-Type": "application/json",
                         "x-admin-pin": adminPin
                     },
                     body: JSON.stringify(payload)
                 });
-                if(!res.ok) throw new Error(await res.text());
+                if (!res.ok) throw new Error(await res.text());
                 alert("Đã thêm sản phẩm mới!");
             }
-            
+
             resetForm();
             loadProducts();
         } catch (e) {
@@ -116,17 +116,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.deleteProduct = async (id) => {
-        if(confirm("Xóa là mất luôn nhé! Bạn có chắc không?")) {
+        if (confirm("Xóa là mất luôn nhé! Bạn có chắc không?")) {
             if (!adminPin) {
                 adminPin = prompt("Vui lòng nhập mã PIN Admin để xác nhận xóa:");
                 if (!adminPin) return;
             }
             try {
-                const res = await fetch(`${API_URL}/${id}`, { 
+                const res = await fetch(`${API_URL}/${id}`, {
                     method: "DELETE",
                     headers: { "x-admin-pin": adminPin }
                 });
-                if(!res.ok) throw new Error("Thất bại");
+                if (!res.ok) throw new Error("Thất bại");
                 loadProducts();
             } catch (e) {
                 alert("Lỗi không thể xóa sản phẩm! Có thể sai mã PIN.");
