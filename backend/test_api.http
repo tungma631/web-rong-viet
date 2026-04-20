@@ -1,0 +1,72 @@
+### Tệp kiểm thử API cho VS Code (REST Client Extension)
+@baseUrl = http://localhost:3000
+@adminPin = 123456
+@authToken = {{login.response.body.token}}
+
+### 1. KIỂM TRA MẶC ĐỊNH
+GET {{baseUrl}}/api/products
+
+### 2. ĐĂNG KÝ TÀI KHOẢN MỚI
+# @name register
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "123",
+    "fullName": "Nguyễn Văn Test",
+    "phone": "0901234567"
+}
+
+### 3. ĐĂNG NHẬP (Lấy Token)
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "123"
+}
+
+### 4. LẤY THÔNG TIN USER (yêu cầu Authorization)
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{authToken}}
+
+### 5. TẠO THANH TOÁN (CHECKOUT)
+POST {{baseUrl}}/api/create-payment-link
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "amount": 2000,
+    "description": "Thanh toan HTRV Test",
+    "items": [
+        {
+            "id": "p2",
+            "name": "Sản phẩm Test",
+            "quantity": 1,
+            "price": 2000
+        }
+    ],
+    "shippingInfo": {
+        "fullName": "Nguyen Van Test",
+        "phone": "0901234567",
+        "address": "123 Duong ABC, Quan 1"
+    }
+}
+
+### 6. LẤY DANH SÁCH ĐƠN KHÁCH CHO ADMIN
+GET {{baseUrl}}/api/admin/orders
+x-admin-pin: {{adminPin}}
+
+### 7. THÊM SẢN PHẨM MỚI TỪ ADMIN
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+x-admin-pin: {{adminPin}}
+
+{
+    "title": "Áo Khoác Rồng Việt Bản Giới Hạn",
+    "price": 850000,
+    "img": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3",
+    "category": "thoi-trang"
+}

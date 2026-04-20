@@ -28,6 +28,12 @@
         .header-action { display: flex; justify-content: space-between; align-items: center; }
         .header-action a { color: var(--primary-color); text-decoration: none; font-weight: 600; }
         .header-action a:hover { text-decoration: underline; }
+        
+        .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .admin-tab { padding: 10px 20px; cursor: pointer; border-radius: 4px; font-weight: bold; color: #555; background: #eee; }
+        .admin-tab.active { background: var(--primary-color); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body>
@@ -37,33 +43,158 @@
             <a href="index.html">← Quay về Cửa hàng</a>
         </div>
 
-        <div class="form-panel">
-            <h3 id="formTitle" style="margin-bottom: 10px;">Thêm Sản Phẩm Mới</h3>
-            <input type="hidden" id="prodId">
-            <input type="text" id="prodTitle" placeholder="Tên sản phẩm (VD: Áo Hành Trình)" required>
-            <input type="number" id="prodPrice" placeholder="Giá tiền (VD: 119000)" required>
-            <input type="text" id="prodImg" placeholder="Đường dẫn ảnh (URL)" required>
-            <select id="prodCategory" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                <option value="thoi-trang">Thời trang</option>
-                <option value="phu-kien">Phụ kiện</option>
-                <option value="ve">Vé sự kiện</option>
-            </select>
-            <button id="btnSaveProd">Lưu Sản Phẩm</button>
-            <button id="btnCancelEdit" style="display:none; background: #95a5a6;">Hủy Cập Nhật</button>
+        <div class="admin-tabs">
+            <div class="admin-tab active" data-target="productsTab">Sản Phẩm</div>
+            <div class="admin-tab" data-target="ordersTab">Đơn Hàng</div>
+            <div class="admin-tab" data-target="usersTab">Khách Hàng</div>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th width="80">Ảnh</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th width="150">Hành Động</th>
-                </tr>
-            </thead>
-            <tbody id="adminProductList">
-                <tr><td colspan="4" style="text-align: center;">Đang tải dữ liệu...</td></tr>
-            </tbody>
-        </table>
+        <div id="productsTab" class="tab-content active">
+            <div class="form-panel">
+                <h3 id="formTitle" style="margin-bottom: 10px;">Thêm Sản Phẩm Mới</h3>
+                <input type="hidden" id="prodId">
+                <input type="text" id="prodTitle" placeholder="Tên sản phẩm (VD: Áo Hành Trình)" required>
+                <input type="number" id="prodPrice" placeholder="Giá tiền (VD: 119000)" required>
+                <input type="text" id="prodImg" placeholder="Đường dẫn ảnh (URL)" required>
+                <select id="prodCategory" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="thoi-trang">Thời trang</option>
+                    <option value="phu-kien">Phụ kiện</option>
+                    <option value="ve">Vé sự kiện</option>
+                </select>
+                <button id="btnSaveProd">Lưu Sản Phẩm</button>
+                <button id="btnCancelEdit" style="display:none; background: #95a5a6;">Hủy Cập Nhật</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th width="80">Ảnh</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th width="150">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody id="adminProductList">
+                    <tr><td colspan="3" style="text-align: center;">Đang tải dữ liệu...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="ordersTab" class="tab-content">
+            <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 15px;">
+                <h3>Danh sách Đơn Đặt Hàng</h3>
+                <div style="display:flex; gap: 10px;">
+                    <input type="text" id="orderSearchInput" placeholder="Tìm ID, SĐT, Địa chỉ, SP..." style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 220px;">
+                    <select id="orderStatusFilter" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="PAID">PAID</option>
+                        <option value="CANCELLED">CANCELLED</option>
+                    </select>
+                    <button id="btnRefreshOrders" style="padding: 5px 10px; background: #ccc; border:none; border-radius:3px; cursor:pointer;">Làm mới</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Đơn / Khách hàng</th>
+                        <th>Địa chỉ giao hàng</th>
+                        <th>Chi tiết SP</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th width="80">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody id="adminOrdersList">
+                    <tr><td colspan="6" style="text-align: center;">Đang tải dữ liệu đơn hàng...</td></tr>
+                </tbody>
+            </table>
+            
+            <!-- Modal Edit Order -->
+            <div id="editOrderModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                <div style="background: #fff; padding: 20px; border-radius: 8px; width: 400px; max-width: 90%;">
+                    <h3>Chỉnh Sửa Đơn Hàng <span id="editOrderCodeTitle"></span></h3>
+                    <div style="margin-top: 15px;">
+                        <label style="font-weight: 600;">Tên Người Nhận</label>
+                        <input type="text" id="editOrderName" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                        
+                        <label style="font-weight: 600;">Số Điện Thoại</label>
+                        <input type="text" id="editOrderPhone" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+
+                        <label style="font-weight: 600;">Địa Chỉ Giao</label>
+                        <input type="text" id="editOrderAddress" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                        
+                        <label style="font-weight: 600;">Trạng Thái</label>
+                        <select id="editOrderStatus" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                            <option value="PENDING">PENDING</option>
+                            <option value="PAID">PAID</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+                        <button id="btnCancelEditOrder" style="padding: 8px 15px; background: #ccc; border:none; border-radius:4px; cursor:pointer;">Hủy</button>
+                        <button id="btnSaveEditOrder" style="padding: 8px 15px; background: var(--secondary-color); color: white; border:none; border-radius:4px; cursor:pointer;">Lưu Thay Đổi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- USERS TAB -->
+        <div id="usersTab" class="tab-content">
+            <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 15px;">
+                <h3>Quản lý Tài Khoản Khách Hàng</h3>
+                <div style="display:flex; gap: 10px;">
+                    <input type="text" id="userSearchInput" placeholder="Tìm tên, username, SĐT..." style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 220px;">
+                    <button id="btnRefreshUsers" style="padding: 5px 10px; background: #ccc; border:none; border-radius:3px; cursor:pointer;">Làm mới</button>
+                    <button id="btnAddUser" style="padding: 5px 10px; background: var(--primary-color); color: white; border:none; border-radius:3px; cursor:pointer;">+ Thêm Khách Hàng</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Họ Tên</th>
+                        <th>SĐT</th>
+                        <th>Quyền</th>
+                        <th>Tình trạng</th>
+                        <th width="100">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody id="adminUsersList">
+                    <tr><td colspan="6" style="text-align: center;">Đang tải danh sách tài khoản...</td></tr>
+                </tbody>
+            </table>
+            
+            <!-- Modal Add/Edit User -->
+            <div id="editUserModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+                <div style="background: #fff; padding: 20px; border-radius: 8px; width: 400px; max-width: 90%;">
+                    <h3 id="editUserModalTitle">Thêm Khách Hàng Mới</h3>
+                    <input type="hidden" id="editUserId">
+                    <div style="margin-top: 15px;">
+                        <label style="font-weight: 600;">Tên Đăng Nhập (Username) <span style="color:red">*</span></label>
+                        <input type="text" id="editUserUsername" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;" required>
+                        
+                        <label style="font-weight: 600;">Mật Khẩu (Để trống nếu không đổi)</label>
+                        <input type="password" id="editUserPassword" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+
+                        <label style="font-weight: 600;">Họ và Tên</label>
+                        <input type="text" id="editUserFullName" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                        
+                        <label style="font-weight: 600;">Số Điện Thoại</label>
+                        <input type="text" id="editUserPhone" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                        
+                        <label style="font-weight: 600;">Trạng Thái Kích Hoạt</label>
+                        <select id="editUserIsActive" style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                            <option value="true">Đang hoạt động (Active)</option>
+                            <option value="false">Khóa (Blocked)</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+                        <button id="btnCancelEditUser" style="padding: 8px 15px; background: #ccc; border:none; border-radius:4px; cursor:pointer;">Hủy</button>
+                        <button id="btnSaveEditUser" style="padding: 8px 15px; background: var(--secondary-color); color: white; border:none; border-radius:4px; cursor:pointer;">Lưu Tài Khoản</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="assets/js/admin.js"></script>

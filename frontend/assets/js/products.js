@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         const fetchUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
-            ? "http://localhost:3000/api/products"
+            ? "http://127.0.0.1:3000/api/products"
             : "/api/products";
         const response = await fetch(fetchUrl);
         const products = await response.json();
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             addBtn.addEventListener('click', () => {
                 if (window.addToCartObject) {
                     window.addToCartObject({
+                        id: product.id,
                         img: product.img,
                         title: product.title,
                         price: product.price

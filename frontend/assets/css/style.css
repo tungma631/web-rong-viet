@@ -153,6 +153,18 @@ nav a.active {
     border-radius: 50%;
 }
 
+@keyframes shakeCart {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px) rotate(-5deg); }
+    50% { transform: translateX(4px) rotate(5deg); }
+    75% { transform: translateX(-4px) rotate(-5deg); }
+    100% { transform: translateX(0); }
+}
+
+.shake-animation {
+    animation: shakeCart 0.4s ease-in-out;
+}
+
 /* Hero Section */
 .hero {
     position: relative;

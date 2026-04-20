@@ -41,6 +41,14 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                 </div>
+                <!-- Account Icon -->
+                <div class="account-icon" id="account-icon" style="cursor: pointer; margin-right: 15px; display: flex; align-items: center;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="account-name" id="accountNameText" style="font-size:0.85rem; margin-left: 5px; font-weight: 600;">Đăng nhập</span>
+                </div>
                 <div class="cart-icon" id="cart-icon">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="9" cy="21" r="1"></circle>
@@ -203,12 +211,62 @@
             <!-- Items sẽ được render qua JS -->
             <p class="empty-cart-msg">Giỏ hàng đang trống.</p>
         </div>
+        
+        <div class="shipping-info-form" id="shippingInfoForm" style="padding: 15px; border-top: 1px solid #eee; background: #fafafa;">
+            <p style="font-weight: 600; margin-bottom: 10px; font-size: 0.9rem;">Thông tin giao hàng:</p>
+            <input type="text" id="shipFullName" placeholder="Họ Tên (*)" style="width: 100%; padding: 8px; margin-bottom: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.85rem;">
+            <input type="text" id="shipPhone" placeholder="Số điện thoại (*)" style="width: 100%; padding: 8px; margin-bottom: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.85rem;">
+            <textarea id="shipAddress" placeholder="Địa chỉ chi tiết (*)" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.85rem; resize: vertical; min-height: 60px;"></textarea>
+            <p id="shipWarningMsg" style="color: red; font-size: 0.8rem; display: none; margin-top: 5px;">Vui lòng điền đủ thông tin!</p>
+        </div>
+
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Tổng cộng:</span>
                 <span id="cartTotalPrice">0 đ</span>
             </div>
             <button class="btn-checkout" id="btnCheckout">Thanh toán (PayOS)</button>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModalOverlay">
+        <div class="modal-content text-center">
+            <span class="close-modal" id="closeAuthModal">&times;</span>
+            <div id="loginFormArea">
+                <h2 style="color: var(--primary-color); margin-bottom: 20px;">Đăng Nhập</h2>
+                <input type="text" id="loginUsername" placeholder="Tên đăng nhập" style="width:100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="password" id="loginPassword" placeholder="Mật khẩu" style="width:100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <p id="loginError" style="color: red; font-size: 0.85rem; margin-bottom: 10px; display: none;"></p>
+                <button class="btn-add-cart" id="btnLoginSubmit" style="width: 100%;">Đăng nhập</button>
+                <p style="margin-top: 15px; font-size: 0.9rem;">Chưa có tài khoản? <a href="#" id="showRegisterLink" style="color: var(--primary-color);">Đăng ký ngay</a></p>
+            </div>
+            
+            <div id="registerFormArea" style="display: none;">
+                <h2 style="color: var(--primary-color); margin-bottom: 20px;">Đăng Ký</h2>
+                <input type="text" id="regUsername" placeholder="Tên đăng nhập (*)" style="width:100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="password" id="regPassword" placeholder="Mật khẩu (*)" style="width:100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="text" id="regFullName" placeholder="Họ Tên" style="width:100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="text" id="regPhone" placeholder="Số điện thoại" style="width:100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <p id="regError" style="color: red; font-size: 0.85rem; margin-bottom: 10px; display: none;"></p>
+                <button class="btn-add-cart" id="btnRegisterSubmit" style="width: 100%;">Đăng ký</button>
+                <p style="margin-top: 15px; font-size: 0.9rem;">Đã có tài khoản? <a href="#" id="showLoginLink" style="color: var(--primary-color);">Về Đăng nhập</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard Modal -->
+    <div class="modal-overlay" id="dashboardModalOverlay">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-modal" id="closeDashboardModal">&times;</span>
+            <h2 style="color: var(--primary-color); margin-bottom: 10px;">Xin chào, <span id="dashFullName"></span></h2>
+            <button class="btn-secondary" id="btnLogOut" style="margin-bottom: 20px; font-size: 0.8rem; padding: 5px 10px;">Đăng xuất khỏi hệ thống</button>
+            <hr style="margin-bottom: 15px; border: 0; border-top: 1px solid #eee;">
+            
+            <h3 style="margin-bottom: 15px;">Lịch sử đơn hàng của bạn</h3>
+            <div id="userOrderHistory" style="max-height: 300px; overflow-y: auto; text-align: left;">
+                <p>Đang tải dữ liệu...</p>
+            </div>
         </div>
     </div>
 
@@ -332,11 +390,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/products.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/cart.js"></script>
-    <script src="assets/js/ai-avatar.js"></script>
-    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/auth.js?v=3"></script>
+    <script src="assets/js/products.js?v=3"></script>
+    <script src="assets/js/main.js?v=3"></script>
+    <script src="assets/js/cart.js?v=3"></script>
+    <script src="assets/js/ai-avatar.js?v=3"></script>
+    <script src="assets/js/chatbot.js?v=3"></script>
 
     <script>
         // SPA Routing cơ bản (Chuyển trang Menu)
