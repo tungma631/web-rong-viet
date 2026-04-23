@@ -9,6 +9,7 @@ const path = require('path');
 const Replicate = require('replicate');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 // Import Sequelize Models
 const sequelize = require('./models/index');
@@ -129,10 +130,40 @@ app.get('/api/auth/me', verifyToken, async (req, res) => {
 // --- PRODUCTS API (Sequelize) ---
 app.get('/api/products', async (req, res) => {
     try {
-        const products = await Product.findAll();
-        res.json(products);
+        let { page, limit, category, search } = req.query;
+        page = parseInt(page) || 1;
+        limit = parseInt(limit) || 8;
+        const offset = (page - 1) * limit;
+
+        const whereClause = {};
+
+        if (category && category !== 'all') {
+            whereClause.category = category;
+        }
+
+        if (search) {
+            whereClause.title = {
+                [Op.iLike]: `%${search}%`
+            };
+        }
+
+        const { count, rows } = await Product.findAndCountAll({
+            where: whereClause,
+            limit: limit,
+            offset: offset,
+            // Cập nhật sắp xếp nếu muốn
+        });
+
+        res.json({
+            products: rows,
+            total: count,
+            page: page,
+            limit: limit,
+            hasMore: offset + limit < count
+        });
     } catch (e) {
-        res.json([]);
+        console.error("Lỗi lấy sản phẩm:", e);
+        res.status(500).json({ error: e.message });
     }
 });
 
