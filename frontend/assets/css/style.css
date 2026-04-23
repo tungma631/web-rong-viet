@@ -171,7 +171,7 @@ nav a.active {
     width: 100%;
     /* Bắt buộc dùng đơn vị tĩnh px (hoặc rem) để khi Ctrl+Scroll, browser sẽ scale px to ra/nhỏ đi vật lý trên màn hình */
     padding: 250px 20px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('../img/hero-banner.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('https://raw.githubusercontent.com/tungma631/cdn-images/refs/heads/main/S%E1%BA%A3n%20ph%E1%BA%A9m/%E1%BA%A2nh%20fix%20c%E1%BB%A9ng/hero-banner.jpg');
     /* Tạm mượn ảnh núi non để mockup */
     background-size: cover;
     background-position: center;
