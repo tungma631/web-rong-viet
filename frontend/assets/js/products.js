@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!productGrid) return;
 
     const loadingMore = document.getElementById("loadingMore");
-    // Lưu lại cái thẻ AI Avatar để nhét lại vào đầu danh sách khi Reset
-    const specialCardHTML = productGrid.innerHTML;
+    // Lưu lại nguyên bản thẻ DOM Node để không bị mất event listener
+    const specialCardNode = productGrid.querySelector(".special-card");
 
     let currentPage = 1;
     let currentLimit = 8;
@@ -24,10 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isReset) {
             currentPage = 1;
             hasMoreData = true;
-            // Xóa sạch để tải lại từ đầu, nhưng giữ nguyên cái thẻ Tạo Ảnh AI
-            productGrid.innerHTML = specialCardHTML;
-            // Vì innerHTML thay mới nên cái thẻ AI Creator cũ mất sự kiện click nếu nó nằm bên main.js, 
-            // Tuy nhiên trong dự án này thẻ AI Creator gắn event id tĩnh "btnCreatorModal" trong ai-avatar.js (bắt theo global document) nên không sao.
+            // Xóa rỗng danh sách
+            productGrid.innerHTML = "";
+            // Nắp lại nguyên bộ Node thẻ đặc biệt vào lại để không đứt sự kiện click
+            if (specialCardNode) {
+                productGrid.appendChild(specialCardNode);
+            }
         }
 
         if (loadingMore) loadingMore.style.display = "block";

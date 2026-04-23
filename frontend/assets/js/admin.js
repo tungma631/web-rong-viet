@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadProducts = async () => {
         try {
             const res = await fetch(API_URL);
-            const products = await res.json();
+            const data = await res.json();
+            const products = Array.isArray(data) ? data : (data.products || []);
 
             adminProductList.innerHTML = "";
             if (products.length === 0) {
