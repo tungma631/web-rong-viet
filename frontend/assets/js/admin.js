@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             });
         } catch (e) {
-            adminProductList.innerHTML = `<tr><td colspan="3" style="text-align: center; color: red;">Lỗi tải dữ liệu. Bạn đã bật Backend chưa?</td></tr>`;
+            adminProductList.innerHTML = `<tr><td colspan="3" style="text-align: center; color: red;">Lỗi tải dữ liệu (${e.message}). Bạn đã bật Backend chưa?</td></tr>`;
+            console.error("Lỗi:", e);
         }
     };
 
